@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mini Curso de Django</title>
+	{% load static from staticfiles %}
+
+	<style>
+		html{
+			background-color : #000;
+			background-image : linear-gradient(to right, rgba(0,0,0,.65), rgba(0,0,0,0)),
+								url('{{ MEDIA_URL }}{{ course.image }}');
+			background-size : cover;
+			background-position : center center;
+			background-attachment : fixed;
+			background-repeat : no-repeat;
+		}
+	</style>
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+
+	<div class="contenedor">
+	<div class="l-logo">
+    	<a class="logo-title" href="/">
+    		<img class="logo-img" src="{% static 'img/logo-default.png' %}" alt="">
+            <span class="logo-titulo">DevCode</span>
+        </a>
+	</div>
+    <div class="container__mini">
+    	<div class="mini__title">
+    		<div>
+    			<div>
+    				<h2 class="mini__buttom">MINI CURSO ONLINE</h2>
+    			</div>
+	    		<div class="mini__info">
+	    			<h1 class="mini__title_h1">{{ course.name }}</h1>
+	    			<p class="mini__description">{{ course.description }}</p>
+	    		</div>
+	    		<div>
+	    			<span class="icon-play mini__icon_play"></span>
+	    			<span class="mini__text_video">120 minutos de clases en vivo y preguntas al profesor en dos sesiones.</span>
+	    		</div>
+    		</div>
+    	</div>
+    	<div class="mini_form">
+		{% if not registered %}	
+    		<div class="mini_form__header">
+    			<h3 class="mini_form__title">Regístrate ahora</h3>
+    		</div>
+    		<form class="mini_form__form" method="POST">{% csrf_token %}
+    			<p class="mini_form__text_title">Curso gratuito que empieza con los 100 primeros inscritos.</p>
+    			<input type="text" class="mini_form__input" placeholder="Tu nombre">
+    			<input type="email" class="mini_form__input" placeholder="Tu email">
+    			<button class="mini_form__button" type="submit">Registrarse</button>
+    		</form>
+    	{% else %}
+    		<div class="mini_form__share">
+    			<figure class="mini_form__figure">
+		    		<img src="{% static 'img/box.png' %}" class="mini_form__image">
+		    	</figure>
+		    	<span class="mini_form__text_register mini_form__text_bold">¡Ya estas registrado!</span>
+		    	<span class="mini_form__text_register ">Te hemos enviado un correo, por favor ayudanos a difundir este curso.</span>
+		    	<div class="button_social">
+		    		<div class="button_social__button">
+		    			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://devcode.la/mini-curso/{{mini.slug}}/" class="button_social_facebook mini_form__text_bold">Compartir en Facebook</a>
+		    		</div>
+		    		<div class="button_social__button ">
+		    			<a target="_blank" href="http://twitter.com/share?text={{mini.titulo_seo}}&url=https://devcode.la/mini-curso/{{mini.slug}}/&hashtags=curso,online" class="button_social_twitter mini_form__text_bold">Compartir en Twitter</a>
+		    		</div>
+		    	</div>
+    		</div>
+    	{% endif %}
+    	</div>
+	</div> 
+</div>
+	<script src="https://apis.google.com/js/platform.js" async defer>
+	  {lang: 'es-419'}
+	</script>
+</body>
+</html>
