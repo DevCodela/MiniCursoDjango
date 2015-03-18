@@ -51,8 +51,9 @@
     		</div>
     		<form class="mini_form__form" method="POST">{% csrf_token %}
     			<p class="mini_form__text_title">Curso gratuito que empieza con los 100 primeros inscritos.</p>
-    			<input type="text" class="mini_form__input" placeholder="Tu nombre">
-    			<input type="email" class="mini_form__input" placeholder="Tu email">
+    			{{ form.full_name }}
+    			{{ form.email }}
+    			{{ form.email.errors }}
     			<button class="mini_form__button" type="submit">Registrarse</button>
     		</form>
     	{% else %}
